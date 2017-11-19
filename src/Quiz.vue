@@ -1,9 +1,17 @@
 <template>
-  <div class="container">
-    <div>
-    {{ currentQuestion.text }}
+  <div class="card">
+    <h2 class="card-header">{{ currentQuestion.text }}</h2>
+    <div class="card-body">
+      <div class="d-flex flex-wrap">
+        <div class="w-100">
+          <button class="btn btn-outline-primary btn-block text-left"
+                  v-for="(answer, index) in currentQuestion.answers"
+                  v-on:click="chooseAnswer(index)">
+                  {{ answer }}
+          </button>
+        </div>
+      </div>
     </div>
-    <button class="col-md-6 btn" v-for="(answer, index) in currentQuestion.answers" v-on:click="chooseAnswer(index)">{{ answer }}</button>
   </div>
 </template>
 
@@ -28,6 +36,7 @@
       incrementIndex() {
         if(this.allQuestions.questions.length > this.currentIndex + 1) {
           this.currentIndex++
+          this.$emit('currentQuestionIndex', this.currentIndex)
         } else {
           alert("win")
         }
@@ -39,6 +48,7 @@
         } else {
           alert("game over")
           this.currentIndex = 0
+          this.$emit('currentQuestionIndex', this.currentIndex)
         }
       }
     }
