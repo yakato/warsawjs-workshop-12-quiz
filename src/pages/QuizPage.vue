@@ -25,7 +25,6 @@
 
 <script>
   import Quiz from './Quiz'
-  import quizzes from '../quizzes_json.json'
   import randomElement from '../helpers'
 
   export default {
@@ -42,11 +41,11 @@
 
     methods: {
       getQuestions: function() {
-        return randomElement(quizzes.quizzes)
+        return randomElement(this.$root.quizzes)
       },
 
       getQuizNumber: function() {
-        return quizzes.quizzes.indexOf(this.questions) + 1
+        return this.$root.quizzes.indexOf(this.questions) + 1
       },
     },
 
