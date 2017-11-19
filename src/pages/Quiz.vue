@@ -54,3 +54,5 @@
     }
   }
 </script>
+
+<!-- add state/status for render win/lose -->
