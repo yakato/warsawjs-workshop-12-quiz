@@ -3,7 +3,7 @@
     <div>
     {{ currentQuestion.text }}
     </div>
-    <button class="col-md-6" v-for="(answer, index) in currentQuestion.answers" v-on:click="chooseAnswer(index)">{{ answer }}</button>
+    <button class="col-md-6 btn" v-for="(answer, index) in currentQuestion.answers" v-on:click="chooseAnswer(index)">{{ answer }}</button>
   </div>
 </template>
 
@@ -26,13 +26,20 @@
 
     methods: {
       incrementIndex() {
-        return this.allQuestions.length > this.currentIndex++ ? this.currentIndex++ : alert("win")
+        if(this.allQuestions.questions.length > this.currentIndex + 1) {
+          this.currentIndex++
+        } else {
+          alert("win")
+        }
       },
 
       chooseAnswer(index) {
-        return index === this.currentQuestion.correctAnswerIndex
-              ? this.incrementIndex()
-              : alert("game over")
+        if(index === this.currentQuestion.correctAnswerIndex) {
+          this.incrementIndex()
+        } else {
+          alert("game over")
+          this.currentIndex = 0
+        }
       }
     }
   }
